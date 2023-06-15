@@ -13,7 +13,11 @@ class Api::V1::AuthController < ApplicationController
           last_name: user.last_name,
           email: user.email,
           token: user.token,
-          verified: user.verified
+          verified: user.verified,
+          birthday: user.birthday,
+          gender: user.gender,
+          phone_number: user.phone_number,
+          country: user.country
         }
       }
     else
@@ -33,14 +37,8 @@ class Api::V1::AuthController < ApplicationController
         render json: { error: @error_messages }, status: 400
        end
     else
-        render json: { error: 'Unable to create user' }, status: 400
+        render json: { error: @error_messages }, status: 400
     end 
-  end
-
-  def logout
-
-    # response.headers['Authorization'].delete
-    render json: { succcess: 'Log out successfully'}
   end
 
   private
@@ -50,6 +48,6 @@ class Api::V1::AuthController < ApplicationController
     end
 
     def signup_params
-        params.permit(:email, :password, :password_confirmation, :first_name, :last_name, :role)
+        params.permit(:email, :password, :password_confirmation, :first_name, :last_name, :birthday, :gender, :phone_number, :country)
     end
 end

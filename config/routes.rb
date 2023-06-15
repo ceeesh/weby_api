@@ -4,7 +4,6 @@ Rails.application.routes.draw do
       
       post '/signin' => 'auth#new_session', as: 'new_session'
       post '/signup' => 'auth#new_account', as: 'new_account'
-      delete '/logout' => 'auth#logout'
 
       get '/show' => 'clients#show', as: 'show_client'
 
