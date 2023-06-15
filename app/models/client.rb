@@ -10,6 +10,7 @@ class Client < ApplicationRecord
   validates :birthday, presence: true
 
   has_many :projects, dependent: :delete_all
+  # has_one_attached :profile_picture
   
   include Authentication
 end

@@ -17,14 +17,14 @@ class Api::V1::ProjectsController < ApplicationController
       @team.update!(project_id: @project.id)
       render json: @project
     else
-      render json: { error: 'Unable to create project' }, status: 400
+      render json: { error: @project.errors.full_messages }, status: 400
     end
   end
 
   private
 
   def project_params
-    params.permit(:name, :description, :status, :start_date, :end_date, :duration)
+    params.permit(:name, :description, :status, :start_date, :end_date, :duration, :priority)
   end
 
   def team_params

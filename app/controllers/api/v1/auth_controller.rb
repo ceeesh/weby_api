@@ -21,7 +21,7 @@ class Api::V1::AuthController < ApplicationController
         }
       }
     else
-      render json: { error: 'Unable to log in' }, status: 400
+      render json: { error: "Incorrect Email or Password " }, status: 400
     end
   end
 
@@ -29,10 +29,24 @@ class Api::V1::AuthController < ApplicationController
   def new_account
   
     if (signup_params[:password] == signup_params[:password_confirmation])
-        
+
         @user, @error_messages = Client.signup(signup_params)
         if @error_messages.nil?
-        render json: @user
+        render json: {
+          registered: true,
+          user: {
+            id: @user.id,
+            first_name: @user.first_name,
+            last_name: @user.last_name,
+            email: @user.email,
+            token: @user.token,
+            verified: @user.verified,
+            birthday: @user.birthday,
+            gender: @user.gender,
+            phone_number: @user.phone_number,
+            country: @user.country
+          }
+        }
        else
         render json: { error: @error_messages }, status: 400
        end
