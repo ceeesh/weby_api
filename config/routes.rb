@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       post '/signin' => 'auth#new_session', as: 'new_session'
       post '/signup' => 'auth#new_account', as: 'new_account'
 
+      patch '/client/:id' => 'clients#update'
+
       get '/projects' => 'projects#index'
       post '/projects' => 'projects#create', as: 'create_project'
       post '/teams' => 'teams#create', as: 'create_team'

@@ -8,6 +8,31 @@ class Api::V1::ClientsController < ApplicationController
     end
   end
 
+  # POST update user data
+  def update 
+    @client = current_user
+
+    if @client.update(edit_params)
+      render json: {
+        edited: true,
+        user: {
+          id: @client.id,
+          first_name: @client.first_name,
+          last_name: @client.last_name,
+          email: @client.email,
+          token: @client.token,
+          verified: @client.verified,
+          birthday: @client.birthday,
+          gender: @client.gender,
+          phone_number: @client.phone_number,
+          country: @client.country
+        }
+      }
+    else
+      render json: { error: @client.errors.full_messages }, status: 400
+    end
+  end
+
   # def upload_photo
   #   # grabbing user from the db using the id from the query string parameters
   #   # i used strong params
@@ -29,6 +54,12 @@ class Api::V1::ClientsController < ApplicationController
     params.permit(:profile_picture, :id)
   end
 
+  def edit_params
+    params.permit(:first_name, :last_name, :birthday, :gender, :phone_number, :country)
+  end
 
+  def client_params
+    params.permit(:email, :password, :password_confirmation, :first_name, :last_name, :birthday, :gender, :phone_number, :country)
+  end
 
 end
