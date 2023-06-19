@@ -17,7 +17,8 @@ class Api::V1::AuthController < ApplicationController
           birthday: user.birthday,
           gender: user.gender,
           phone_number: user.phone_number,
-          country: user.country
+          country: user.country,
+          admin: user.admin
         }
       }
     else
@@ -32,21 +33,7 @@ class Api::V1::AuthController < ApplicationController
 
         @user, @error_messages = Client.signup(signup_params)
         if @error_messages.nil?
-        render json: {
-          registered: true,
-          user: {
-            id: @user.id,
-            first_name: @user.first_name,
-            last_name: @user.last_name,
-            email: @user.email,
-            token: @user.token,
-            verified: @user.verified,
-            birthday: @user.birthday,
-            gender: @user.gender,
-            phone_number: @user.phone_number,
-            country: @user.country
-          }
-        }
+        render json: { success: "Registration Successful"}
        else
         render json: { error: @error_messages }, status: 400
        end

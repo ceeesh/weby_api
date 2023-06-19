@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
       patch '/client/:id' => 'clients#update'
 
+      get '/bookings' => 'bookings#index'
       get '/projects' => 'projects#index'
       post '/projects' => 'projects#create', as: 'create_project'
       post '/teams' => 'teams#create', as: 'create_team'
