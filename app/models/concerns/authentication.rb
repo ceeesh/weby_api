@@ -14,15 +14,15 @@ module Authentication
         birthday: signup_params[:birthday], gender: signup_params[:gender], 
         phone_number: signup_params[:phone_number], country: signup_params[:country])
 
-        return @user, @user.errors.full_messages if @user.errors.present?
+        # return @user, @user.errors.full_messages if @user.errors.present?
 
-        # if user.save
-        #   user.update!(token: token)
-        #   return user
-        # else
-        #   errors = user.errors.full_messages
-        #   return user, errors
-        # end
+        if @user.save
+          @user.update!(token: @token)
+          return @user
+        else
+          errors = @user.errors.full_messages
+          return @user, errors
+        end
  
     end
 
