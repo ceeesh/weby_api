@@ -52,3 +52,4 @@ end
 gem 'simplecov', require: false, group: :test
 gem 'jwt'
 gem "ruby-vips"
+gem 'sprockets-rails', :require => 'sprockets/railtie'
