@@ -5,8 +5,21 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-Team.create! do |u|
-  u.team_name = 'first'
-  u.id = '1'
-  
+include BCrypt
+
+Client.create!(email: "admin2@test.com" , password: Password.create('password'), 
+admin: true, first_name: 'admin', 
+last_name: 'admin', gender: 'Others', 
+country: 'PH', birthday: 'admin', phone_number: 'admin')
+
+Client.create! do |u|
+  u.email = 'admin1@test.com'
+  u.first_name = 'admin'
+  u.last_name = 'admin'
+  u.gender = 'Others'
+  u.country = 'PH'
+  u.password = 'password'
+  u.birthday = 'admin'
+  u.phone_number = 'admin'
+  u.admin = true
 end

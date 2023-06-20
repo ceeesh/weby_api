@@ -18,7 +18,8 @@ class Api::V1::AuthController < ApplicationController
           gender: user.gender,
           phone_number: user.phone_number,
           country: user.country,
-          admin: user.admin
+          admin: user.admin,
+          profile_picture_url: user.profile_picture_url
         }
       }
     else
