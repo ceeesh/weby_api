@@ -6,8 +6,6 @@ class Project < ApplicationRecord
   validates :duration, presence: true
   validates :priority, presence: true
   
-  has_one :team
   has_many :transactions
-  has_many :notifications
   
 end

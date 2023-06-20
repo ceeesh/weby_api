@@ -11,10 +11,10 @@ class Api::V1::ProjectsController < ApplicationController
     @project = current_user.projects.new(project_params)
   
     if @project.save
+      @booking = Booking.new(booking_params)
       @transaction = Transaction.new(transaction_params)
-      @team = Team.new(team_params)
       @transaction.update!(project_id: @project.id)
-      @team.update!(project_id: @project.id)
+      @booking.update!(client_id: current_user.id)
       render json: @project
     else
       render json: { error: @project.errors.full_messages }, status: 400
@@ -27,8 +27,8 @@ class Api::V1::ProjectsController < ApplicationController
     params.permit(:name, :description, :status, :start_date, :end_date, :duration, :priority)
   end
 
-  def team_params
-    params.permit(:name)
+  def booking_params
+    params.permit(:name, :notes, :start_date, :end_date, :status)
   end
 
   def transaction_params
