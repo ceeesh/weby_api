@@ -31,7 +31,6 @@ class Api::V1::AuthController < ApplicationController
   def new_account
   
     if (signup_params[:password] == signup_params[:password_confirmation])
-
         @user, @error_messages = Client.signup(signup_params)
         if @error_messages.nil?
         render json: { success: "Registration Successful"}
