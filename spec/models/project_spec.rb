@@ -5,7 +5,12 @@ RSpec.describe Project, type: :model do
 
   it "should have many projects" do
     t = Project.reflect_on_association(:transactions)
-    expect(t.macro).to eq(:has_many)
+    expect(t.macro).to be(:has_many)
+  end
+
+  it "shouldn't only have one" do
+    t = Project.reflect_on_association(:transactions)
+    expect(t.macro).not_to be(:has_one)
   end
 
 end
