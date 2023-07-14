@@ -46,20 +46,20 @@ RSpec.describe '/Client', type: :request do
     end
   end
 
-  describe 'PATCH /client/:id with invalid token' do
-    it 'updates client data' do
-      patch '/api/v1/client/2', params: { first_name: client.first_name, last_name: client.last_name, 
-        birthday: client.birthday, gender: client.gender, phone_number: client.phone_number, 
-        country: client.country, profile_picture_url: client.profile_picture_url }, headers: { Authorization: 'token'}
+  describe 'PATCH /client/:id with invalid params' do
+    it 'doesnt update client data with invalid info' do
+      patch '/api/v1/client/2', params: { first_name: nil, last_name: nil, 
+        birthday: nil, gender: nil, phone_number: nil, 
+        country: nil, profile_picture_url: nil }, headers: { Authorization: client.token }
       expect(response).not_to have_http_status(200)
     end
   end
 
-  describe 'PATCH /client/:id with invalid authorization' do
-    it 'updates client data' do
+  describe 'PATCH /client/:id with invalid token' do
+    it 'doesnt update client data' do
       patch '/api/v1/client/2', params: { first_name: client.first_name, last_name: client.last_name, 
         birthday: client.birthday, gender: client.gender, phone_number: client.phone_number, 
-        country: client.country, profile_picture_url: client.profile_picture_url }, headers: { Authorization: 'hello' }
+        country: client.country, profile_picture_url: client.profile_picture_url }, headers: { Authorization: 'token'}
       expect(response).not_to have_http_status(200)
     end
   end
